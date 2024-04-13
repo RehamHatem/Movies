@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/home_tap.dart';
+import '../screens/home_tap/home_tap.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "home";

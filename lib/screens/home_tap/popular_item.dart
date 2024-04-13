@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../models/ImagesResponce.dart';
-import '../models/PopularResponse.dart';
+import '../../models/ImagesResponce.dart';
+import '../../models/PopularResponse.dart';
 
 class PopItem extends StatelessWidget {
   List<Results> result;

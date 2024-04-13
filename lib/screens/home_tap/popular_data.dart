@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:movies_app/screens/popular_item.dart';
+import 'package:movies_app/screens/home_tap/popular_item.dart';
 
-import '../shared/network/api.dart';
+import '../../shared/network/api.dart';
 
 class PopData extends StatelessWidget {
   const PopData({super.key});
