@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -59,13 +60,16 @@ class _UpComItemState extends State<UpComItem> {
                       height: 127,
                       width: 96,
                       padding: EdgeInsets.zero,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                "${widget.images.baseUrl}original${widget.upResults[index].posterPath}"),
-                            fit: BoxFit.fill,
-                          )),
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+
+                        child: CachedNetworkImage(
+                          fit: BoxFit.fill,
+                          imageUrl: "${widget.images.baseUrl}original${widget.upResults[index].posterPath}",
+                          placeholder: (context, url) => CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(Icons.error),
+                        ),),
                     ),
                     InkWell(
                       onTap: () {

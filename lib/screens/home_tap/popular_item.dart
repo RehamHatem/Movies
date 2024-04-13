@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,10 @@ class PopItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
-          height: 260,  autoPlay: true,enlargeCenterPage: true,),
+        height: 260,
+        autoPlay: true,
+        enlargeCenterPage: true,
+      ),
       items: result.map((result) {
         return Builder(
           builder: (BuildContext context) {
@@ -37,18 +41,32 @@ class PopItem extends StatelessWidget {
                         width: double.infinity,
                         height: 190,
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(
-
-                            image: DecorationImage(
-                          image: NetworkImage("${images.baseUrl}original${result.backdropPath ?? ""}"),
-
-                          fit: BoxFit.fill,
-
-                        )),
-                        child: Icon(
-                          Icons.play_circle,
-                          size: 50,
-                          color: Colors.white,
+                        // decoration: BoxDecoration(
+                        //     image: DecorationImage(
+                        //   image: NetworkImage(
+                        //       "${images.baseUrl}original${result.backdropPath ?? ""}"),
+                        //   fit: BoxFit.fill,
+                        // )),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            ClipRRect(
+                              child: CachedNetworkImage(
+                                fit: BoxFit.fill,
+                                imageUrl:
+                                    "${images.baseUrl}original${result.backdropPath ?? ""}",
+                                placeholder: (context, url) =>
+                                    CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
+                            ),
+                            Icon(
+                              Icons.play_circle,
+                              size: 50,
+                              color: Colors.white,
+                            )
+                          ],
                         )),
                   ],
                 ),
@@ -80,15 +98,17 @@ class PopItem extends StatelessWidget {
                               "${result.title}",
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style:GoogleFonts.inter(
+                              style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize:15,
-
+                                fontSize: 15,
                               ),
                             ),
-                            Text("${result.releaseDate}",style: GoogleFonts.inter(
-                              color: Color(0xffB5B4B4),
-                            ),)
+                            Text(
+                              "${result.releaseDate}",
+                              style: GoogleFonts.inter(
+                                color: Color(0xffB5B4B4),
+                              ),
+                            )
                           ],
                         ),
                       ),

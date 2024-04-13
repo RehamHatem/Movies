@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -69,13 +70,16 @@ class _TopRelatedItemState extends State<TopRelatedItem> {
                               height: 130,
                               width: 130,
                               padding: EdgeInsets.zero,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        "${widget.images.baseUrl}original${widget.topResults[index].posterPath}"),
-                                    fit: BoxFit.fill,
-                                  )),
+
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10)),
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.fill,
+
+                                  imageUrl: "${widget.images.baseUrl}original${widget.topResults[index].posterPath}",
+                                  placeholder: (context, url) => CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) => Icon(Icons.error),
+                                ),),
                             ),
                             InkWell(
                               onTap: () {
