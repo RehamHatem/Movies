@@ -36,6 +36,7 @@ class _UpComItemState extends State<UpComItem> {
             "New Releases ",
             style: GoogleFonts.inter(
               fontSize: 15,
+              fontWeight:FontWeight.w600,
               color: Colors.white,
             ),
           ),

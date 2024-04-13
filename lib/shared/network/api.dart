@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../models/ImagesResponce.dart';
 import '../../models/PopularResponse.dart';
+import '../../models/TopRelatedResponse.dart';
 import '../../models/UpComingResponse.dart';
 
 class APImanager {
@@ -50,7 +51,21 @@ class APImanager {
     });
 
     var json = jsonDecode(resposne.body);
-    print(json);
     return UpComingResponse.fromJson(json);
+  }
+
+
+  //https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1
+  static Future<TopRelatedResponse> getTopRelated() async {
+    Uri url = Uri.https("api.themoviedb.org", "/3/movie/top_rated",
+        {"language": "en-US", "page": "1"});
+    var resposne = await http.get(url, headers: {
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlY2NjMjUwNTIzMjgzMDU3YTBiNGZmMWZiZGVjNmNmNiIsInN1YiI6IjY2MTk2ZGY2MTIxOTdlMDE2NGJiYjIyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPUNmzmmwTP1iRWP4y08m6_4TfXwpZYhushBNEq-qmQ'
+    });
+
+    var json = jsonDecode(resposne.body);
+    print(json);
+    return TopRelatedResponse.fromJson(json);
   }
 }

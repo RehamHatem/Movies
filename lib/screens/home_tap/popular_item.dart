@@ -18,7 +18,7 @@ class PopItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
-          height: 289,  autoPlay: true,enlargeCenterPage: true,),
+          height: 260,  autoPlay: true,enlargeCenterPage: true,),
       items: result.map((result) {
         return Builder(
           builder: (BuildContext context) {
@@ -30,12 +30,12 @@ class PopItem extends StatelessWidget {
                   children: [
                     Container(
                       width: double.infinity,
-                      height: 289,
+                      height: 260,
                       decoration: BoxDecoration(color: Colors.transparent),
                     ),
                     Container(
                         width: double.infinity,
-                        height: 217,
+                        height: 190,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
 
@@ -58,8 +58,8 @@ class PopItem extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Container(
-                          width: 129,
-                          height: 199,
+                          width: 100,
+                          height: 170,
                           child: Image(
                             image: NetworkImage(
                                 "${images.baseUrl}original${result.posterPath ?? ""}"),
@@ -71,21 +71,18 @@ class PopItem extends StatelessWidget {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
+                        padding: const EdgeInsets.only(bottom: 8),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "${result.title}",
-                              maxLines: 3,
+                              maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style:GoogleFonts.inter(
                                 color: Colors.white,
                                 fontSize:15,
-
-
-
 
                               ),
                             ),
