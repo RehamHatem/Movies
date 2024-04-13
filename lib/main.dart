@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+
 import 'layouts/home.dart';
 import 'layouts/splash.dart';
+import 'screens/home_tap/popular_item.dart';
 
 void main() {
   runApp(const MyApp());
