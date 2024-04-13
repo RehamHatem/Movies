@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState(
     );
-    Timer(Duration(seconds: 10), () {
+    Timer(Duration(seconds: 5), () {
       Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     });
   }
@@ -26,6 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Color(0xff121312),
       body: Stack(
+        alignment: Alignment.center,
 
         children: [
           Center(child: Image.asset("assets/images/splash.png")),
@@ -34,15 +35,16 @@ class _SplashScreenState extends State<SplashScreen> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text("Route",style: GoogleFonts.poppins(
                   color: Color(0xffFFBB3B),
-                  fontSize: 20,
+                  fontSize: 15,
                   fontWeight: FontWeight.w400,
                 )),
                 Text("supervised by Mohamed Hamouda",style: GoogleFonts.poppins(
                   color: Color(0xffFFBB3B),
-                  fontSize: 20,
+                  fontSize: 15,
                   fontWeight: FontWeight.w400,
                 )),
               ],

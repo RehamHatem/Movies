@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/home_tap/home_tap.dart';
+
 class HomeScreen extends StatefulWidget {
   static const String routeName = "home";
 
@@ -15,7 +17,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-
+body: Stack(
+  children: [
+    Container(color: Color(0xff121312),),
+    taps[index],
+  ],
+),
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Color(0xff1A1A1A),
           elevation: 0,
@@ -44,4 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ]),
     );
   }
+  List<Widget>taps=[
+    HomeTap(),
+  ];
 }
