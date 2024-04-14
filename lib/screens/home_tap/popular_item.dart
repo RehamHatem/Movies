@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../layouts/movie_details.dart';
-import '../../models/ImagesResponce.dart';
-import '../../models/PopularResponse.dart';
+import '../../layouts/home_layouts/movie_details.dart';
+import '../../models/home_models/ImagesResponce.dart';
+import '../../models/home_models/PopularResponse.dart';
 
 class PopItem extends StatelessWidget {
   List<Results> result;
