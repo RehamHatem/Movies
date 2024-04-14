@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/browse_models/CategoriesResponse.dart';
 import '../../models/home_models/ImagesResponce.dart';
+import 'genre_data.dart';
 
 class Category_item extends StatelessWidget {
   Genres gen;
@@ -11,24 +12,29 @@ class Category_item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children:[
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              image: DecorationImage(image: AssetImage(image),fit: BoxFit.fill,opacity: .3)
-            ),),
-            Text(gen.name ?? "",style: TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.w600
-            ),),
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, GenreData.routeName,arguments: gen);
+      },
+      child: Stack(
+        alignment: Alignment.center,
+        children:[
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                image: DecorationImage(image: AssetImage(image),fit: BoxFit.fill,opacity: .3)
+              ),),
+              Text(gen.name ?? "",style: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w600
+              ),),
 
-      ],
+        ],
 
 
 
+      ),
     ) ;
   }
 }
