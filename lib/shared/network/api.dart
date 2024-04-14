@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../models/ImagesResponce.dart';
+import '../../models/MovieDetailsResponse.dart';
 import '../../models/PopularResponse.dart';
+import '../../models/SimilarMoviesResponse.dart';
 import '../../models/TopRelatedResponse.dart';
 import '../../models/UpComingResponse.dart';
 
@@ -67,5 +69,30 @@ class APImanager {
     var json = jsonDecode(resposne.body);
     print(json);
     return TopRelatedResponse.fromJson(json);
+  }
+
+//https://api.themoviedb.org/3/movie/278?language=en-US
+  static Future<MovieDetailsResponse> getMovieDetails(int id) async {
+    Uri url = Uri.https("api.themoviedb.org", "/3/movie/$id",
+        {"language": "en-US" });
+    var resposne = await http.get(url, headers: {
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlY2NjMjUwNTIzMjgzMDU3YTBiNGZmMWZiZGVjNmNmNiIsInN1YiI6IjY2MTk2ZGY2MTIxOTdlMDE2NGJiYjIyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPUNmzmmwTP1iRWP4y08m6_4TfXwpZYhushBNEq-qmQ'
+    });
+
+    var json = jsonDecode(resposne.body);
+    return MovieDetailsResponse.fromJson(json);
+  }
+//https://api.themoviedb.org/3/movie/278/similar?language=en-US&page=1
+  static Future<SimilarMoviesResponse> getSimilarMovies(int id) async {
+    Uri url = Uri.https("api.themoviedb.org", "/3/movie/$id/similar",
+        {"language": "en-US","page":"1" });
+    var resposne = await http.get(url, headers: {
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlY2NjMjUwNTIzMjgzMDU3YTBiNGZmMWZiZGVjNmNmNiIsInN1YiI6IjY2MTk2ZGY2MTIxOTdlMDE2NGJiYjIyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPUNmzmmwTP1iRWP4y08m6_4TfXwpZYhushBNEq-qmQ'
+    });
+
+    var json = jsonDecode(resposne.body);
+    return SimilarMoviesResponse.fromJson(json);
   }
 }
