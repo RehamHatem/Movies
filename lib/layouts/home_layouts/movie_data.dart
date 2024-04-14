@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../models/MovieDetailsResponse.dart';
-import '../models/SimilarMoviesResponse.dart';
-import '../shared/network/api.dart';
+import '../../models/home_models/MovieDetailsResponse.dart';
+import '../../models/home_models/SimilarMoviesResponse.dart';
+import '../../shared/network/api.dart';
 import 'movie_details.dart';
 
 class MovieData extends StatelessWidget {
@@ -106,14 +106,14 @@ class MovieData extends StatelessWidget {
                           alignment: Alignment.topLeft,
                           children: [
                             Container(
-                              height: 200,
+                              height: 210,
                               width: 130,
                               padding: EdgeInsets.zero,
                               child: ClipRRect(
                                 child: CachedNetworkImage(
                                   fit: BoxFit.fill,
                                   imageUrl:
-                                      "${images.baseUrl}original${movieDetails.posterPath}",
+                                      "${images.baseUrl}original${movieDetails.posterPath??""}",
                                   placeholder: (context, url) =>
                                       CircularProgressIndicator(),
                                   errorWidget: (context, url, error) =>
@@ -153,38 +153,35 @@ class MovieData extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: movieDetails.genres?.map((genre) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 10.0),
-                                            child: Container(
-                                              width: 65,
-                                              height: 25,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                border: Border.all(
-                                                    color: Color(0xffCBCBCB)),
-                                              ),
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                genre.name ?? "",
-                                                style: TextStyle(
-                                                    color: Color(0xffCBCBCB),
-                                                    fontSize: 10,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
+                                Wrap(
+
+                                  children: movieDetails.genres?.map((genre) {
+                                        return Padding(
+                                          padding: const EdgeInsets.only(
+                                              right: 10.0,bottom: 5),
+                                          child: Container(
+                                            width: 65,
+                                            height: 25,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              border: Border.all(
+                                                  color: Color(0xffCBCBCB)),
                                             ),
-                                          );
-                                        }).toList() ??
-                                        [],
-                                  ),
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              genre.name ?? "",
+                                              style: TextStyle(
+                                                  color: Color(0xffCBCBCB),
+                                                  fontSize: 10,
+                                                  fontWeight:
+                                                      FontWeight.w400),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        );
+                                      }).toList() ?? [],
                                 ),
                                 SizedBox(height: 15),
                                 Text(
@@ -253,7 +250,7 @@ class MovieData extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return SingleChildScrollView(
                                 child: Container(
-                                  height: 250,
+                                  height: 255,
                                   width: 130,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),

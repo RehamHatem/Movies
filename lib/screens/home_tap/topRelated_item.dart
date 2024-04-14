@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../layouts/movie_details.dart';
-import '../../models/ImagesResponce.dart';
-import '../../models/TopRelatedResponse.dart';
+import '../../layouts/home_layouts/movie_details.dart';
+import '../../models/home_models/ImagesResponce.dart';
+import '../../models/home_models/TopRelatedResponse.dart';
 
 
 

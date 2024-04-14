@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 
-import 'layouts/home.dart';
-import 'layouts/movie_details.dart';
+
+import 'layouts/home_layouts/home.dart';
+import 'layouts/home_layouts/movie_details.dart';
 import 'layouts/splash.dart';
 import 'screens/home_tap/popular_item.dart';
 
