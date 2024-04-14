@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../layouts/movie_details.dart';
 import '../../models/ImagesResponce.dart';
 import '../../models/PopularResponse.dart';
 
@@ -26,96 +27,111 @@ class PopItem extends StatelessWidget {
       items: result.map((result) {
         return Builder(
           builder: (BuildContext context) {
-            return Stack(
-              alignment: Alignment.bottomLeft,
-              children: [
-                Stack(
-                  alignment: Alignment.topCenter,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 260,
-                      decoration: BoxDecoration(color: Colors.transparent),
-                    ),
-                    Container(
+            return InkWell(
+              onTap: () {
+
+                Navigator.pushNamed(context, MovieDetails.routeName,arguments: result.id);
+
+              },
+              child: Stack(
+                alignment: Alignment.bottomLeft,
+                children: [
+                  Stack(
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Container(
                         width: double.infinity,
-                        height: 190,
-                        alignment: Alignment.center,
-                        // decoration: BoxDecoration(
-                        //     image: DecorationImage(
-                        //   image: NetworkImage(
-                        //       "${images.baseUrl}original${result.backdropPath ?? ""}"),
-                        //   fit: BoxFit.fill,
-                        // )),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            ClipRRect(
-                              child: CachedNetworkImage(
-                                fit: BoxFit.fill,
-                                imageUrl:
-                                    "${images.baseUrl}original${result.backdropPath ?? ""}",
-                                placeholder: (context, url) =>
-                                    CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error),
-                              ),
-                            ),
-                            Icon(
-                              Icons.play_circle,
-                              size: 50,
-                              color: Colors.white,
-                            )
-                          ],
-                        )),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Container(
-                          width: 100,
-                          height: 170,
-                          child: Image(
-                            image: NetworkImage(
-                                "${images.baseUrl}original${result.posterPath ?? ""}"),
-                            fit: BoxFit.cover,
-                          )),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${result.title}",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.inter(
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                            ),
-                            Text(
-                              "${result.releaseDate}",
-                              style: GoogleFonts.inter(
-                                color: Color(0xffB5B4B4),
-                              ),
-                            )
-                          ],
-                        ),
+                        height: 260,
+                        decoration: BoxDecoration(color: Colors.transparent),
                       ),
-                    )
-                  ],
-                ),
-              ],
+                      Container(
+                          width: double.infinity,
+                          height: 190,
+                          alignment: Alignment.center,
+                          // decoration: BoxDecoration(
+                          //     image: DecorationImage(
+                          //   image: NetworkImage(
+                          //       "${images.baseUrl}original${result.backdropPath ?? ""}"),
+                          //   fit: BoxFit.fill,
+                          // )),
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              ClipRRect(
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.fill,
+                                  imageUrl:
+                                      "${images.baseUrl}original${result.backdropPath ?? ""}",
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                ),
+                              ),
+                              Icon(
+                                Icons.play_circle,
+                                size: 50,
+                                color: Colors.white,
+                              )
+                            ],
+                          )),
+                    ],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Container(
+                            width: 100,
+                            height: 170,
+                            child: ClipRRect(
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.fill,
+                                  imageUrl:
+                                  "${images.baseUrl}original${result.posterPath ?? ""}",
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                ),
+                              ),
+
+                              ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${result.title}",
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.inter(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              Text(
+                                "${result.releaseDate}",
+                                style: GoogleFonts.inter(
+                                  color: Color(0xffB5B4B4),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             );
           },
         );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 
 import 'layouts/home.dart';
+import 'layouts/movie_details.dart';
 import 'layouts/splash.dart';
 import 'screens/home_tap/popular_item.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routeName:(context) => SplashScreen(),
         HomeScreen.routeName:(context) => HomeScreen(),
+        MovieDetails.routeName:(context) => MovieDetails(),
       },
     );
   }
