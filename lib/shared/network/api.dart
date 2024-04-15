@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:movies_app/models/home_models/SearchResponse.dart';
 import '../../models/browse_models/CategoriesResponse.dart';
 import '../../models/browse_models/GenreResponse.dart';
 import '../../models/home_models/ImagesResponce.dart';
@@ -21,7 +22,7 @@ class APImanager {
       url,
       headers: {
         'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlY2NjMjUwNTIzMjgzMDU3YTBiNGZmMWZiZGVjNmNmNiIsInN1YiI6IjY2MTk2ZGY2MTIxOTdlMDE2NGJiYjIyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPUNmzmmwTP1iRWP4y08m6_4TfXwpZYhushBNEq-qmQ'
+        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlY2NjMjUwNTIzMjgzMDU3YTBiNGZmMWZiZGVjNmNmNiIsInN1YiI6IjY2MTk2ZGY2MTIxOTdlMDE2NGJiYjIyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPUNmzmmwTP1iRWP4y08m6_4TfXwpZYhushBNEq-qmQ'
       },
     );
     Map<String, dynamic> json = jsonDecode(resposne.body);
@@ -37,7 +38,7 @@ class APImanager {
     );
     var resposne = await http.get(url, headers: {
       'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlY2NjMjUwNTIzMjgzMDU3YTBiNGZmMWZiZGVjNmNmNiIsInN1YiI6IjY2MTk2ZGY2MTIxOTdlMDE2NGJiYjIyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPUNmzmmwTP1iRWP4y08m6_4TfXwpZYhushBNEq-qmQ'
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlY2NjMjUwNTIzMjgzMDU3YTBiNGZmMWZiZGVjNmNmNiIsInN1YiI6IjY2MTk2ZGY2MTIxOTdlMDE2NGJiYjIyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPUNmzmmwTP1iRWP4y08m6_4TfXwpZYhushBNEq-qmQ'
     });
 
     var json = jsonDecode(resposne.body);
@@ -51,7 +52,7 @@ class APImanager {
         {"language": "en", "page": "1"});
     var resposne = await http.get(url, headers: {
       'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlY2NjMjUwNTIzMjgzMDU3YTBiNGZmMWZiZGVjNmNmNiIsInN1YiI6IjY2MTk2ZGY2MTIxOTdlMDE2NGJiYjIyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPUNmzmmwTP1iRWP4y08m6_4TfXwpZYhushBNEq-qmQ'
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlY2NjMjUwNTIzMjgzMDU3YTBiNGZmMWZiZGVjNmNmNiIsInN1YiI6IjY2MTk2ZGY2MTIxOTdlMDE2NGJiYjIyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPUNmzmmwTP1iRWP4y08m6_4TfXwpZYhushBNEq-qmQ'
     });
 
     var json = jsonDecode(resposne.body);
@@ -76,7 +77,7 @@ class APImanager {
 //https://api.themoviedb.org/3/movie/278?language=en-US
   static Future<MovieDetailsResponse> getMovieDetails(int id) async {
     Uri url = Uri.https("api.themoviedb.org", "/3/movie/$id",
-        {"language": "en-US" });
+        {"language": "en-US"});
     var resposne = await http.get(url, headers: {
       'Authorization':
       'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlY2NjMjUwNTIzMjgzMDU3YTBiNGZmMWZiZGVjNmNmNiIsInN1YiI6IjY2MTk2ZGY2MTIxOTdlMDE2NGJiYjIyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPUNmzmmwTP1iRWP4y08m6_4TfXwpZYhushBNEq-qmQ'
@@ -85,10 +86,11 @@ class APImanager {
     var json = jsonDecode(resposne.body);
     return MovieDetailsResponse.fromJson(json);
   }
+
 //https://api.themoviedb.org/3/movie/278/similar?language=en-US&page=1
   static Future<SimilarMoviesResponse> getSimilarMovies(int id) async {
     Uri url = Uri.https("api.themoviedb.org", "/3/movie/$id/similar",
-        {"language": "en-US","page":"1" });
+        {"language": "en-US", "page": "1"});
     var resposne = await http.get(url, headers: {
       'Authorization':
       'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlY2NjMjUwNTIzMjgzMDU3YTBiNGZmMWZiZGVjNmNmNiIsInN1YiI6IjY2MTk2ZGY2MTIxOTdlMDE2NGJiYjIyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPUNmzmmwTP1iRWP4y08m6_4TfXwpZYhushBNEq-qmQ'
@@ -97,10 +99,30 @@ class APImanager {
     var json = jsonDecode(resposne.body);
     return SimilarMoviesResponse.fromJson(json);
   }
-//https://api.themoviedb.org/3/genre/movie/list?language=en
+
+  static Future<SearchResponse> getsearch(String query) async {
+    // https://api.themoviedb.org/3/search/movie?query=ali&include_adult=false&language=en-US&page=1
+    Uri url = Uri.https("api.themoviedb.org", "/3/search/movie",
+        {
+          "query": query,
+          "include_adult=": "false",
+          "language": "en-US",
+          "page": "1",
+        });
+    var resposne = await http.get(url, headers: {
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlY2NjMjUwNTIzMjgzMDU3YTBiNGZmMWZiZGVjNmNmNiIsInN1YiI6IjY2MTk2ZGY2MTIxOTdlMDE2NGJiYjIyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPUNmzmmwTP1iRWP4y08m6_4TfXwpZYhushBNEq-qmQ'
+    });
+
+    var json = jsonDecode(resposne.body);
+    print(json);
+    return SearchResponse.fromJson(json);
+  }
+
+  //https://api.themoviedb.org/3/genre/movie/list?language=en
   static Future<CategoriesResponse> getCategories() async {
     Uri url = Uri.https("api.themoviedb.org", "/3/genre/movie/list",
-        {"language": "en" });
+        {"language": "en"});
     var resposne = await http.get(url, headers: {
       'Authorization':
       'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlY2NjMjUwNTIzMjgzMDU3YTBiNGZmMWZiZGVjNmNmNiIsInN1YiI6IjY2MTk2ZGY2MTIxOTdlMDE2NGJiYjIyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPUNmzmmwTP1iRWP4y08m6_4TfXwpZYhushBNEq-qmQ'
@@ -113,7 +135,12 @@ class APImanager {
 //https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc
   static Future<GenreResponse> getGenre(String id) async {
     Uri url = Uri.https("api.themoviedb.org", "/3/discover/movie",
-        {"language": "en","page":"1" ,"with_genres":id,"sort_by":"popularity.desc"});
+        {
+          "language": "en",
+          "page": "1",
+          "with_genres": id,
+          "sort_by": "popularity.desc"
+        });
     var resposne = await http.get(url, headers: {
       'Authorization':
       'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlY2NjMjUwNTIzMjgzMDU3YTBiNGZmMWZiZGVjNmNmNiIsInN1YiI6IjY2MTk2ZGY2MTIxOTdlMDE2NGJiYjIyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPUNmzmmwTP1iRWP4y08m6_4TfXwpZYhushBNEq-qmQ'

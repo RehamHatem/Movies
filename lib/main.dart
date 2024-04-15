@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/screens/browse_tap/genre_data.dart';
+import 'package:movies_app/screens/home_tap/searchResults.dart';
 
 
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName:(context) => SplashScreen(),
         HomeScreen.routeName:(context) => HomeScreen(),
         MovieDetails.routeName:(context) => MovieDetails(),
+        SearchResults.routeName:(context) => SearchResults(q: '',),
         GenreData.routeName:(context) => GenreData(),
       },
     );

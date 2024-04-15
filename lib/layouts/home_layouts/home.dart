@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/screens/home_tap/searchResults.dart';
 
 import '../../screens/browse_tap/browse_tap.dart';
 import '../../screens/home_tap/home_tap.dart';
+import '../../screens/home_tap/search_tap.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "home";
@@ -54,6 +56,7 @@ body: Stack(
   }
   List<Widget>taps=[
     HomeTap(),
+    Search_Tap(),
     BrowseTap(),
   ];
 }

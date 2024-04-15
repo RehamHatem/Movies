@@ -3,7 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../layouts/home_layouts/movie_details.dart';
 import '../../models/home_models/ImagesResponce.dart';
@@ -113,14 +112,14 @@ class PopItem extends StatelessWidget {
                                 "${result.title}",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.inter(
+                                style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
                                 ),
                               ),
                               Text(
                                 "${result.releaseDate}",
-                                style: GoogleFonts.inter(
+                                style: TextStyle(
                                   color: Color(0xffB5B4B4),
                                 ),
                               )

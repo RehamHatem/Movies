@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 
 import 'home_layouts/home.dart';
 
@@ -37,12 +37,12 @@ class _SplashScreenState extends State<SplashScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("Route",style: GoogleFonts.poppins(
+                Text("Route",style: TextStyle(
                   color: Color(0xffFFBB3B),
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                 )),
-                Text("supervised by Mohamed Hamouda",style: GoogleFonts.poppins(
+                Text("supervised by Mohamed Hamouda",style: TextStyle(
                   color: Color(0xffFFBB3B),
                   fontSize: 15,
                   fontWeight: FontWeight.w400,

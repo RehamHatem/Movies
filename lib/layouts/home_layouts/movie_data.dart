@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../models/home_models/MovieDetailsResponse.dart';
 import '../../models/home_models/SimilarMoviesResponse.dart';
@@ -230,7 +229,7 @@ class MovieData extends StatelessWidget {
                       children: [
                         Text(
                           "More Like This ",
-                          style: GoogleFonts.inter(
+                          style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
                             color: Colors.white,
