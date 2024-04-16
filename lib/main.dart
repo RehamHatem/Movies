@@ -24,7 +24,6 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName:(context) => SplashScreen(),
         HomeScreen.routeName:(context) => HomeScreen(),
         MovieDetails.routeName:(context) => MovieDetails(),
-        SearchResults.routeName:(context) => SearchResults(q: '',),
         GenreData.routeName:(context) => GenreData(),
       },
     );

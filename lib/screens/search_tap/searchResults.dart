@@ -7,8 +7,6 @@ import 'package:movies_app/screens/search_tap/search_item.dart';
 import '../../shared/network/api.dart';
 
 class SearchResults extends StatelessWidget {
-  static const String routeName="search";
-
   String q;
    SearchResults({super.key,required this.q});
   @override
