@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:movies_app/models/home_models/SearchResponse.dart';
+import 'package:movies_app/models/search_models/SearchResponse.dart';
 import '../../models/browse_models/CategoriesResponse.dart';
 import '../../models/browse_models/GenreResponse.dart';
 import '../../models/home_models/ImagesResponce.dart';

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/screens/home_tap/searchResults.dart';
+import 'package:movies_app/screens/search_tap/searchResults.dart';
 
 import '../../screens/browse_tap/browse_tap.dart';
 import '../../screens/home_tap/home_tap.dart';
-import '../../screens/home_tap/search_tap.dart';
+import '../../screens/search_tap/search_tap.dart';
+
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "home";
@@ -20,12 +21,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-body: Stack(
-  children: [
-    Container(color: Color(0xff121312),),
-    taps[index],
-  ],
-),
+      resizeToAvoidBottomInset: false,
+backgroundColor: Color(0xff121312),
+body: SafeArea(child: taps[index]),
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Color(0xff1A1A1A),
           elevation: 0,

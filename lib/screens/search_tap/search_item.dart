@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../layouts/home_layouts/movie_details.dart';
-import '../../models/home_models/SearchResponse.dart';
+import '../../models/search_models/SearchResponse.dart';
 import '../../models/home_models/ImagesResponce.dart';
 
 class search_item extends StatefulWidget {

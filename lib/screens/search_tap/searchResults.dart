@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/screens/home_tap/search_item.dart';
+import 'package:flutter/widgets.dart';
+import 'package:movies_app/screens/search_tap/search_item.dart';
+
 
 import '../../shared/network/api.dart';
 
@@ -18,27 +20,30 @@ class SearchResults extends StatelessWidget {
       if(snapshot.hasError){
         return Text("something went wtong",style: TextStyle(color: Colors.white));
       }
-      var topList=snapshot.data?[0].results?? [];
+      var searchList=snapshot.data?[0].results?? [];
       var images = snapshot.data?[1].images??[];
-      if(topList.isEmpty){
-        return Column(
-          children: [
-            SizedBox(height: 150,),
-            Center(
-                child: Icon(
-                  Icons.local_movies_sharp,
-                  color: Colors.white,
-                  size: 150,
-                )),
-              Center(
-                  child: Text(
-                    "No movies found",
-                    style: TextStyle(color: Colors.white),
-                  )),
-          ],
+      if(searchList.isEmpty){
+        return Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.local_movies_sharp,
+                color: Colors.white,
+                size: 150,
+              ),
+              Text(
+                "No movies found",
+                style: TextStyle(color: Colors.white),
+              ),
+          
+            ],
+          ),
         );
       }
-      return search_item(images: images, result: topList,) ;
+
+      return search_item(images: images, result: searchList,) ;
 
     } );
   }

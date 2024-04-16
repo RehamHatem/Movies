@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/screens/browse_tap/genre_data.dart';
-import 'package:movies_app/screens/home_tap/searchResults.dart';
+import 'package:movies_app/screens/search_tap/searchResults.dart';
 
 
 
