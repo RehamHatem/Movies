@@ -8,20 +8,25 @@ import '../../models/home_models/SimilarMoviesResponse.dart';
 import '../../shared/network/api.dart';
 import 'movie_details.dart';
 
-class MovieData extends StatelessWidget {
+class MovieData extends StatefulWidget {
   int movieId;
 
   MovieData({super.key, required this.movieId});
 
+  @override
+  State<MovieData> createState() => _MovieDataState();
+}
+
+class _MovieDataState extends State<MovieData> {
   bool addClick = false;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: Future.wait([
-          APImanager.getMovieDetails(movieId),
+          APImanager.getMovieDetails(widget.movieId),
           APImanager.getImages(),
-          APImanager.getSimilarMovies(movieId)
+          APImanager.getSimilarMovies(widget.movieId)
         ]),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -123,8 +128,9 @@ class MovieData extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 addClick = !addClick;
-                                // setState(() {});
+                                setState(() {});
                               },
+
                               child: Stack(
                                 alignment: Alignment.center,
                                 children: [

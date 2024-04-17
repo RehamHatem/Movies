@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/screens/home_tap/searchResults.dart';
+import 'package:movies_app/shared/Firebase/watchList_Tab.dart';
 
 import '../../screens/browse_tap/browse_tap.dart';
 import '../../screens/home_tap/home_tap.dart';
@@ -58,5 +59,6 @@ body: Stack(
     HomeTap(),
     Search_Tap(),
     BrowseTap(),
+    watchList(),
   ];
 }

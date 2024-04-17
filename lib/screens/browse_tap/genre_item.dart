@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/models/browse_models/GenreResponse.dart';
-
 import '../../layouts/home_layouts/movie_details.dart';
 import '../../models/home_models/ImagesResponce.dart';
 

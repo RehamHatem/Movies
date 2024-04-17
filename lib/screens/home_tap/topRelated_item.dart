@@ -1,26 +1,27 @@
+
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_app/shared/Firebase/firebase_functions.dart';
+import 'package:movies_app/shared/Firebase/movieModel.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 import '../../layouts/home_layouts/movie_details.dart';
 import '../../models/home_models/ImagesResponce.dart';
 import '../../models/home_models/TopRelatedResponse.dart';
 
-
-
 class TopRelatedItem extends StatefulWidget {
   List<Results> topResults;
   Images images;
-
   TopRelatedItem({Key? key, required this.topResults, required this.images})
       : super(key: key);
 
   @override
   State<TopRelatedItem> createState() => _TopRelatedItemState();
 }
-
 class _TopRelatedItemState extends State<TopRelatedItem> {
-  bool addClick = false;
+  List<bool> _iconStates = [];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +38,7 @@ class _TopRelatedItemState extends State<TopRelatedItem> {
             "Recomended ",
             style: TextStyle(
               fontSize: 15,
-              fontWeight:FontWeight.w600,
+              fontWeight: FontWeight.w600,
               color: Colors.white,
             ),
           ),
@@ -57,17 +58,19 @@ class _TopRelatedItemState extends State<TopRelatedItem> {
                   child: Container(
                     height: 250,
                     width: 130,
-                  
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),color: Color(0xff343534),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xff343534),
                     ),
                     child: InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, MovieDetails.routeName,arguments:widget.topResults[index].id );
-
+                        Navigator.pushNamed(
+                          context,
+                          MovieDetails.routeName,
+                          arguments: widget.topResults[index].id,
+                        );
                       },
                       child: Column(
-
                         children: [
                           Stack(
                             alignment: Alignment.topLeft,
@@ -76,40 +79,67 @@ class _TopRelatedItemState extends State<TopRelatedItem> {
                                 height: 130,
                                 width: 130,
                                 padding: EdgeInsets.zero,
-
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10)),
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(10),
+                                    topLeft: Radius.circular(10),
+                                  ),
                                   child: CachedNetworkImage(
                                     fit: BoxFit.fill,
-
-                                    imageUrl: "${widget.images.baseUrl}original${widget.topResults[index].posterPath}",
-                                    placeholder: (context, url) => CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) => Icon(Icons.error),
-                                  ),),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  addClick = !addClick;
-                                  setState(() {});
-                                },
-                                child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.bookmark_outlined,
-                                      color: addClick
-                                          ? Color(0xffF7B539)
-                                          : Color(0xff514F4F),
-                                      size: 50,
-                                    ),
-                                    Icon(
-                                      addClick ? Icons.check : Icons.add,
-                                      size: 20,
-                                      color: Colors.white,
-                                    )
-                                  ],
+                                    imageUrl:
+                                    "${widget.images.baseUrl}original${widget.topResults[index].posterPath}",
+                                    placeholder: (context, url) =>
+                                        CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        Icon(Icons.error),
+                                  ),
                                 ),
-                              )
+                              ),
+                              Positioned(
+                                  top: 1,
+                                  left: 1,
+                                child: InkWell(
+                                  onTap: ()  {
+                                    setState(() {
+                                      if (_iconStates.length <= index) {
+                                        // If index is out of bounds, add more elements to the list
+                                        _iconStates.add(true);
+                                      } else {
+                                        _iconStates[index] = !_iconStates[index];
+                                      } MovieModel movieModel = MovieModel(
+                                        title: widget.topResults[index].title,
+                                        addclick: true,
+                                        movieId: widget.topResults[index].id,
+                                      );
+                                      Firebasefunctions.addmovie(movieModel);
+                                      print("Movie Model: $movieModel");
+
+                                    });
+                                  } ,
+
+
+
+                                child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.bookmark_outlined,
+                                        color: _iconStates.length > index && _iconStates[index]
+                                            ? Color(0xffF7B539)
+                                            : Color(0xff514F4F),
+                                        size: 50,
+                                      ),
+                                      Icon(
+                                        _iconStates.length > index && _iconStates[index]
+                                            ? Icons.check
+                                            : Icons.add,
+                                        size: 20,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                           Padding(
@@ -118,28 +148,45 @@ class _TopRelatedItemState extends State<TopRelatedItem> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                              Row(
-                                children: [
-                                  Icon(Icons.star,color: Color(0xffFFBB3B),),
-                                  SizedBox(width: 5,),
-                                  Text("${widget.topResults[index].voteAverage}",style: TextStyle(
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star,
+                                      color: Color(0xffFFBB3B),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "${widget.topResults[index].voteAverage}",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  "${widget.topResults[index].title}",
+                                  style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 10
-                                  ),),
-                                ],
-                              ),
-                              Text("${widget.topResults[index].title}",style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12,
-                              ),),
-                              SizedBox(height: 5,),
-                              Text("${widget.topResults[index].releaseDate}",style: TextStyle(
-                                fontSize: 10,
-                                color: Color(0xffB5B4B4),
-                              ),)
-                            ],),
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "${widget.topResults[index].releaseDate}",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Color(0xffB5B4B4),
+                                  ),
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),
