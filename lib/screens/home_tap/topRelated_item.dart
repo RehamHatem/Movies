@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
 
 import '../../layouts/home_layouts/movie_details.dart';
 import '../../models/home_models/ImagesResponce.dart';
 import '../../models/home_models/TopRelatedResponse.dart';
-
-
+import '../../shared/firebase/firebase_functions.dart';
+import '../../shared/firebase/movie_model.dart';
 
 class TopRelatedItem extends StatefulWidget {
   List<Results> topResults;
@@ -20,7 +19,11 @@ class TopRelatedItem extends StatefulWidget {
 }
 
 class _TopRelatedItemState extends State<TopRelatedItem> {
-  bool addClick = false;
+  List<bool> addClick = [];
+  void initState() {
+    super.initState();
+    addClick = List.filled(widget.topResults.length, false);
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -89,21 +92,45 @@ class _TopRelatedItemState extends State<TopRelatedItem> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  addClick = !addClick;
-                                  setState(() {});
+                                  setState(() {
+                                    addClick[index] = !addClick[index];
+                                    if(addClick[index]==true){
+                                      MovieModel movieModel = MovieModel(
+                                        addclick: addClick[index],
+                                        movieId: widget.topResults[index].id,
+                                        title: widget.topResults[index].title,
+                                        posterPath: widget.topResults[index].posterPath,
+                                        releaseDate: widget.topResults[index].releaseDate,
+                                        voteAverage: widget.topResults[index].voteAverage,
+                                        genreIds: widget.topResults[index].genreIds,
+                                        backdropPath: widget.topResults[index].backdropPath,
+                                        overview: widget.topResults[index].overview,
+                                        adult: widget.topResults[index].adult,
+                                        originalLanguage: widget.topResults[index].originalLanguage,
+                                        originalTitle: widget.topResults[index].originalTitle,
+                                        popularity: widget.topResults[index].popularity,
+                                        video: widget.topResults[index].video,
+                                        voteCount: widget.topResults[index].voteCount,
+                                      );
+
+                                      Firebasefunctions.addmovie(movieModel);
+                                      print("Movie Model: $movieModel");
+                                    }
+
+                                  });
                                 },
                                 child: Stack(
                                   alignment: Alignment.center,
                                   children: [
                                     Icon(
                                       Icons.bookmark_outlined,
-                                      color: addClick
+                                      color: addClick[index]
                                           ? Color(0xffF7B539)
                                           : Color(0xff514F4F),
                                       size: 50,
                                     ),
                                     Icon(
-                                      addClick ? Icons.check : Icons.add,
+                                      addClick[index] ? Icons.check : Icons.add,
                                       size: 20,
                                       color: Colors.white,
                                     )

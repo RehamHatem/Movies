@@ -38,6 +38,8 @@ dependencies:
   http: any
   carousel_slider: any
   cached_network_image: ^3.3.1
+  firebase_core: ^2.30.0
+  cloud_firestore: ^4.17.0
 
 dev_dependencies:
   flutter_test:
