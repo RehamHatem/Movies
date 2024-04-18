@@ -4,6 +4,7 @@ import 'package:movies_app/screens/search_tap/searchResults.dart';
 import '../../screens/browse_tap/browse_tap.dart';
 import '../../screens/home_tap/home_tap.dart';
 import '../../screens/search_tap/search_tap.dart';
+import '../../screens/watch_tap/watch_list_tap.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -56,5 +57,6 @@ body: SafeArea(child: taps[index]),
     HomeTap(),
     Search_Tap(),
     BrowseTap(),
+    WatchList()
   ];
 }
