@@ -26,9 +26,9 @@ class Firebasefunctions {
   }
 
 
-  // static Future<void> deleteTask(String id) {
-  //   return getAllmovies().doc(id).delete();
-  // }
+  static Future<void> deleteMovie(String id) {
+    return getAllmovies().doc(id).delete();
+  }
 
 // static Future<void> updateTask(MovieModel model) {
 //   return getmovie().doc(model.id).update(model.toJson());
