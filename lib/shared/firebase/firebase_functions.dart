@@ -1,29 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../../models/home_models/TopRelatedResponse.dart';
 import 'movie_model.dart';
 
 class Firebasefunctions {
 
-  static CollectionReference<Results> getAllmovies() {
-    return  FirebaseFirestore.instance.collection("Movies").withConverter<Results>(
-        fromFirestore: (snapshot, options) {
-          return Results.fromJson(snapshot.data()!);
+  static CollectionReference<MovieModel> getAllmovies() {
+    return FirebaseFirestore.instance.collection("Movies").withConverter<MovieModel>(
+        fromFirestore: (snapshot, _) {
+          return MovieModel.fromJson(snapshot.data()!);
         }, toFirestore: (value, _) {
       return value.toJson();
     });
   }
-  static Future<void> addmovie(Results movie) {
+
+  static Future<void> addmovie(MovieModel movie) {
     var collection = getAllmovies();
     var docref = collection.doc();
-    String mid=movie.id.toString();
-    mid=docref.id;
+    movie.id = docref.id;
     return docref.set(movie);
   }
 
-  static Future<QuerySnapshot<Results>>getMovie() {
-    return getAllmovies().get();
+
+  static Future<List<MovieModel>> getMovie() async {
+    QuerySnapshot<MovieModel> querySnapshot = await getAllmovies().get();
+    return querySnapshot.docs.map((doc) => doc.data()).toList() ;
   }
+
+
   // static Future<void> deleteTask(String id) {
   //   return getAllmovies().doc(id).delete();
   // }

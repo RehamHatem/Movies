@@ -7,6 +7,8 @@ import 'package:flutter/widgets.dart';
 import '../../layouts/home_layouts/movie_details.dart';
 import '../../models/home_models/ImagesResponce.dart';
 import '../../models/home_models/UpComingResponse.dart';
+import '../../shared/firebase/firebase_functions.dart';
+import '../../shared/firebase/movie_model.dart';
 
 class UpComItem extends StatefulWidget {
   List<Results> upResults;
@@ -20,7 +22,11 @@ class UpComItem extends StatefulWidget {
 }
 
 class _UpComItemState extends State<UpComItem> {
-  bool addClick = false;
+  List<bool> addClick = [];
+  void initState() {
+    super.initState();
+    addClick = List.filled(widget.upResults.length, false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,21 +84,46 @@ class _UpComItemState extends State<UpComItem> {
                     ),
                     InkWell(
                       onTap: () {
-                        addClick = !addClick;
-                        setState(() {});
+
+                        setState(() {
+                          addClick[index] = !addClick[index];
+                          if(addClick[index]==true){
+                            MovieModel movieModel = MovieModel(
+                              addclick: addClick[index],
+                              movieId: widget.upResults[index].id,
+                              title: widget.upResults[index].title,
+                              posterPath: widget.upResults[index].posterPath,
+                              releaseDate: widget.upResults[index].releaseDate,
+                              voteAverage: widget.upResults[index].voteAverage,
+                              genreIds: widget.upResults[index].genreIds,
+                              backdropPath: widget.upResults[index].backdropPath,
+                              overview: widget.upResults[index].overview,
+                              adult: widget.upResults[index].adult,
+                              originalLanguage: widget.upResults[index].originalLanguage,
+                              originalTitle: widget.upResults[index].originalTitle,
+                              popularity: widget.upResults[index].popularity,
+                              video: widget.upResults[index].video,
+                              voteCount: widget.upResults[index].voteCount,
+                            );
+
+                            Firebasefunctions.addmovie(movieModel);
+
+                          }
+
+                        });
                       },
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
                           Icon(
                             Icons.bookmark_outlined,
-                            color: addClick
+                            color: addClick[index]
                                 ? Color(0xffF7B539)
                                 : Color(0xff514F4F),
                             size: 50,
                           ),
                           Icon(
-                            addClick ? Icons.check : Icons.add,
+                            addClick[index] ? Icons.check : Icons.add,
                             size: 20,
                             color: Colors.white,
                           )

@@ -95,8 +95,9 @@ class _TopRelatedItemState extends State<TopRelatedItem> {
                                   setState(() {
                                     addClick[index] = !addClick[index];
                                     if(addClick[index]==true){
-                                      Results movieModel = Results(
-                                        id: widget.topResults[index].id,
+                                      MovieModel movieModel = MovieModel(
+                                        addclick: addClick[index],
+                                        movieId: widget.topResults[index].id,
                                         title: widget.topResults[index].title,
                                         posterPath: widget.topResults[index].posterPath,
                                         releaseDate: widget.topResults[index].releaseDate,

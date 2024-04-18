@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import '../../layouts/home_layouts/movie_details.dart';
 import '../../models/search_models/SearchResponse.dart';
 import '../../models/home_models/ImagesResponce.dart';
+import '../../shared/firebase/firebase_functions.dart';
+import '../../shared/firebase/movie_model.dart';
 
 class search_item extends StatefulWidget {
   List<Results> result;
@@ -20,7 +22,11 @@ class search_item extends StatefulWidget {
 }
 
 class _search_itemState extends State<search_item> {
-  bool addClick = false;
+  List<bool> addClick = [];
+  void initState() {
+    super.initState();
+    addClick = List.filled(widget.result.length, false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,21 +65,45 @@ class _search_itemState extends State<search_item> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    addClick = !addClick;
-                                    // setState(() {});
+                                    setState(() {
+                                      addClick[index] = !addClick[index];
+                                      if(addClick[index]==true){
+                                        MovieModel movieModel = MovieModel(
+                                          addclick: addClick[index],
+                                          movieId: widget.result[index].id,
+                                          title: widget.result[index].title,
+                                          posterPath: widget.result[index].posterPath,
+                                          releaseDate: widget.result[index].releaseDate,
+                                          voteAverage: widget.result[index].voteAverage,
+                                          genreIds: widget.result[index].genreIds,
+                                          backdropPath: widget.result[index].backdropPath,
+                                          overview: widget.result[index].overview,
+                                          adult: widget.result[index].adult,
+                                          originalLanguage: widget.result[index].originalLanguage,
+                                          originalTitle: widget.result[index].originalTitle,
+                                          popularity: widget.result[index].popularity,
+                                          video: widget.result[index].video,
+                                          voteCount: widget.result[index].voteCount,
+                                        );
+
+                                        Firebasefunctions.addmovie(movieModel);
+
+                                      }
+
+                                    });
                                   },
                                   child: Stack(
                                     alignment: Alignment.center,
                                     children: [
                                       Icon(
                                         Icons.bookmark_outlined,
-                                        color: addClick
+                                        color: addClick[index]
                                             ? Color(0xffF7B539)
                                             : Color(0xff514F4F),
                                         size: 50,
                                       ),
                                       Icon(
-                                        addClick ? Icons.check : Icons.add,
+                                        addClick[index] ? Icons.check : Icons.add,
                                         size: 20,
                                         color: Colors.white,
                                       )
