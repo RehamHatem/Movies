@@ -19,7 +19,7 @@ class MovieModel {
   int? voteCount;
 
   MovieModel({
-    this.id = '',
+     this.id = "" ,
     required this.addclick,
     required this.movieId,
     this.adult,

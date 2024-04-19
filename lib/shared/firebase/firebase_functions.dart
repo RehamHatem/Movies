@@ -20,11 +20,14 @@ class Firebasefunctions {
   }
 
 
-  static Future<List<MovieModel>> getMovie() async {
-    QuerySnapshot<MovieModel> querySnapshot = await getAllmovies().get();
-    return querySnapshot.docs.map((doc) => doc.data()).toList() ;
+  // static Future<List<MovieModel>> getMovie() async {
+  //   QuerySnapshot<MovieModel> querySnapshot = await getAllmovies().get();
+  //   return querySnapshot.docs.map((doc) => doc.data()).toList() ;
+  // }
+  static Stream<List<MovieModel>> getMovie() {
+    return getAllmovies().snapshots().map((querySnapshot) =>
+        querySnapshot.docs.map((doc) => doc.data()).toList());
   }
-
 
   static Future<void> deleteMovie(String id) {
     return getAllmovies().doc(id).delete();

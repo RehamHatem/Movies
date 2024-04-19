@@ -6,6 +6,8 @@ import 'package:movies_app/layouts/home_layouts/samilar_item.dart';
 
 import '../../models/home_models/MovieDetailsResponse.dart';
 import '../../models/home_models/SimilarMoviesResponse.dart';
+import '../../shared/firebase/firebase_functions.dart';
+import '../../shared/firebase/movie_model.dart';
 import '../../shared/network/api.dart';
 import 'movie_details.dart';
 
@@ -128,8 +130,33 @@ class _MovieDataState extends State<MovieData> {
                             ),
                             InkWell(
                               onTap: () {
-                                addClick = !addClick;
-                                 setState(() {});
+                                setState(() {
+                                  addClick = !addClick;
+                                  if(addClick==true){
+                                    MovieModel movieModel = MovieModel(
+                                      addclick: addClick,
+
+                                      movieId:movieDetails.id,
+                                      title: movieDetails.title,
+                                      posterPath: movieDetails.posterPath,
+                                      releaseDate: movieDetails.releaseDate,
+                                      voteAverage: movieDetails.voteAverage,
+                                      backdropPath: movieDetails.backdropPath,
+                                      overview: movieDetails.overview,
+                                      adult: movieDetails.adult,
+                                      originalLanguage: movieDetails.originalLanguage,
+                                      originalTitle: movieDetails.originalTitle,
+                                      popularity: movieDetails.popularity,
+                                      video: movieDetails.video,
+                                      voteCount: movieDetails.voteCount,
+                                    );
+
+                                    Firebasefunctions.addmovie(movieModel);
+                                    print("Movie Model: $movieModel");
+                                  }
+
+
+                                });
                               },
                               child: Stack(
                                 alignment: Alignment.center,
