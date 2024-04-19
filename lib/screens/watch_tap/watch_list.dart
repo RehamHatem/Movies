@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/screens/watch_tap/wach_item.dart';
 
+import '../../models/home_models/ImagesResponce.dart';
 import '../../shared/firebase/firebase_functions.dart';
 import '../../shared/network/api.dart';
 
@@ -12,9 +13,12 @@ class WatchList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: FutureBuilder(
-                future: Future.wait(
-        [Firebasefunctions.getMovie(), APImanager.getImages()]),
+      child: StreamBuilder(
+                stream: Firebasefunctions.getMovie().asyncMap((movieList) async {
+                  var image = await APImanager.getImages();
+                  var images = image.images;
+                  return [movieList, images];
+                }),
                 builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
         return Center(child: CircularProgressIndicator());
@@ -22,8 +26,8 @@ class WatchList extends StatelessWidget {
       if (snapshot.hasError) {
         return Column(
           children: [
-            Text("something went wrong"),
-            ElevatedButton(onPressed: () {}, child: Text("try again"))
+            Center(child: Text("something went wrong",style: TextStyle(color: Colors.white),)),
+
           ],
         );
       }
@@ -32,7 +36,7 @@ class WatchList extends StatelessWidget {
       var movielist = snapshot.data?[0]??[] ;
       
       
-      var images = snapshot.data?[1].images??[];
+      var images = snapshot.data?[1]??[];
       
       if (movielist.isEmpty) {
         return Center(child: Text("No Watch List Movies",style: TextStyle(
@@ -47,4 +51,5 @@ class WatchList extends StatelessWidget {
               ),
     );
   }
+
 }

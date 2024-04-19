@@ -60,7 +60,7 @@ class _TopRelatedItemState extends State<TopRelatedItem> {
                   child: Container(
                     height: 250,
                     width: 130,
-                  
+
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),color: Color(0xff343534),
                     ),
@@ -116,6 +116,7 @@ class _TopRelatedItemState extends State<TopRelatedItem> {
                                       Firebasefunctions.addmovie(movieModel);
                                       print("Movie Model: $movieModel");
                                     }
+                                    
 
                                   });
                                 },

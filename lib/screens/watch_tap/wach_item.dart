@@ -26,86 +26,87 @@ class _WatchItemState extends State<WatchItem> {
         return Divider(color: Color(0xff707070),);
       },
      itemBuilder: (context, index) {
-      return Column(
-        children: [
-          InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, MovieDetails.routeName,arguments:widget.movieModel[index].movieId );
-            },
-            child: Row(
-              children: [
-                Stack(
-                  alignment: Alignment.topLeft,
-                  children: [
-                    Container(
-                        height: 90,
-                        width: 140,
-                        padding: EdgeInsets.zero,
-                        child:
-                      ClipRRect(
-                        child: CachedNetworkImage(
-                          fit: BoxFit.fill,
-
-                          imageUrl: "${widget.images.baseUrl}original${widget.movieModel[index].posterPath}",                                      placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
-                        ),),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Firebasefunctions.deleteMovie(widget.movieModel[index].id);
-                        setState(() {
-                          Firebasefunctions.getMovie();
-
-                        });
-
-                      },
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Icon(
-                            Icons.bookmark_outlined,
-                            color: Color(0xffF7B539),
-                            size: 50,
-                          ),
-                          Icon(
-                            Icons.check ,
-                            size: 20,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(width: 10,),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+      return Padding(
+        padding: const EdgeInsets.only(left: 8,right: 8),
+        child: Column(
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, MovieDetails.routeName,arguments:widget.movieModel[index].movieId );
+              },
+              child: Row(
+                children: [
+                  Stack(
+                    alignment: Alignment.topLeft,
                     children: [
-                      Text(widget.movieModel[index].title ?? "",style: TextStyle(fontWeight: FontWeight.w400,
-                          fontSize: 15,color: Colors.white),maxLines: 2,overflow: TextOverflow.ellipsis,),
-                      SizedBox(height: 10,),
-                      Text(widget.movieModel[index].releaseDate??"",style: TextStyle(fontWeight: FontWeight.w400,
-                          fontSize: 13,color: Colors.white),maxLines: 2,overflow: TextOverflow.ellipsis,),
-                      SizedBox(height: 5,),
+                      Container(
+                          height: 90,
+                          width: 140,
+                          padding: EdgeInsets.zero,
+                          child:
+                        ClipRRect(
+                          child: CachedNetworkImage(
+                            fit: BoxFit.fill,
 
-                      Row(
-                        children: [
-                          Icon(Icons.star,color: Color(0xffFFBB3B),size: 30,),
-                          SizedBox(width: 5,),
-                          Text("${widget.movieModel[index].voteAverage}" ,style: TextStyle(fontWeight: FontWeight.w400,
-                              fontSize: 13,color: Colors.white),),
-                        ],
+                            imageUrl: "${widget.images.baseUrl}original${widget.movieModel[index].posterPath}",                                      placeholder: (context, url) => CircularProgressIndicator(),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
+                          ),),
                       ),
+                      InkWell(
+                        onTap: () {
+                          Firebasefunctions.deleteMovie(widget.movieModel[index].id);
+                          setState(() {
+                            Firebasefunctions.getMovie();
+                          });
+                        },
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Icon(
+                              Icons.bookmark_outlined,
+                              color: Color(0xffF7B539),
+                              size: 50,
+                            ),
+                            Icon(
+                              Icons.check ,
+                              size: 20,
+                              color: Colors.white,
+                            )
+                          ],
+                        ),
+                      )
                     ],
                   ),
-                )
-              ],
-            ),
-          )
+                  SizedBox(width: 10,),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(widget.movieModel[index].title ?? "",style: TextStyle(fontWeight: FontWeight.w400,
+                            fontSize: 15,color: Colors.white),maxLines: 2,overflow: TextOverflow.ellipsis,),
+                        SizedBox(height: 10,),
+                        Text(widget.movieModel[index].releaseDate??"",style: TextStyle(fontWeight: FontWeight.w400,
+                            fontSize: 13,color: Colors.white),maxLines: 2,overflow: TextOverflow.ellipsis,),
+                        SizedBox(height: 5,),
 
-        ],
+                        Row(
+                          children: [
+                            Icon(Icons.star,color: Color(0xffFFBB3B),size: 30,),
+                            SizedBox(width: 5,),
+                            Text("${widget.movieModel[index].voteAverage}" ,style: TextStyle(fontWeight: FontWeight.w400,
+                                fontSize: 13,color: Colors.white),),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
+
+          ],
+        ),
       );
 
      },
